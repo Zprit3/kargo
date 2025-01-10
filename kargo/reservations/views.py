@@ -1,19 +1,19 @@
 from django.shortcuts import render, redirect
-from .models import Reservations, Track
+from .models import Reservation, Track
 from .forms import ReservationForm
 from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-    return render(request, "home.html")
+    return render(request, "reservations/home.html")
 
 
 def about_us(request):
-    return render(request, "about_us.html")
+    return render(request, "reservations/about_us.html")
 
 
 def gallery(request):
-    return render(request, 'gallery.html')
+    return render(request, 'reservations/gallery.html')
 
 
 @login_required

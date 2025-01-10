@@ -20,11 +20,17 @@ class Track(models.Model):
     track_type = models.CharField(max_length=10, choices=TRACK_TYPES)
     vehicle_count = models.PositiveIntegerField()
     
+    class Meta:
+        permissions = [
+            ("can_manage_tracks", "Can manage tracks"),
+            ("can_view_reservations", "Can view reservations")
+        ]
+    
     def __str__(self):
         return self.name
     
     
-class Reservations(models.Model):
+class Reservation(models.Model):
     STATUS_CHOICES = (
         ('reserved','Reserved'),
         ('occupied','Ocuppied'),
