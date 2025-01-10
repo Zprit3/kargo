@@ -1,12 +1,22 @@
 from django import forms
-from .models import Reservation
+from django.contrib.auth.models import User
+from .models import Reservation, Client
 
 
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = ['date', 'time']
-        widget = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'time': forms.Select(choices=[(f"{hour}:00", f"{hour}:00") for hour in range(8, 21)]),
-        }
+    
+    def save(self, commit=True):
+        reservation = super().save(commit=False)
+        if(commit):
+            reservation.save()
+            
+            user, created = User.objects.get_or_create(
+                username=self.cleaned_data['email'],
+                defaults={'email': self.cleaned_data['email']}
+            )
+            if created:
+                Client.objects.create(user=user, phone=self.cleaned_data['phone'], age = self.cleaned_data['age'])
+        return reservation

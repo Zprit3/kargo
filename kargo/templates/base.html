@@ -27,6 +27,10 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
           </li>
 
@@ -48,8 +52,13 @@
 
       <p>Your adventure begins here.</p>
     </div>
-
-    {% block content %}{% endblock %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li class="alert {{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% block content %}{% endblock %}
 
     <hr />
     <footer>

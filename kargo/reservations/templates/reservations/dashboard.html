@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<div>
+  <h2>Reservations</h2>
+  <ul>
+    {% for reservation in reservations %}
+      <li>{{ reservation.client }} - {{ reservation.track }} ({{ reservation.status }})</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div>
+  <h2>Tracks</h2>
+  <ul>
+    {% for track in tracks %}
+      <li>{{ track.name }} ({{ track.track_type }})</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div>
+  <h2>Clients</h2>
+  <ul>
+    {% for client in clients %}
+      <li>{{ client.user.username }} - {{ client.phone }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
